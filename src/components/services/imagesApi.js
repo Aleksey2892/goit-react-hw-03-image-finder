@@ -8,10 +8,7 @@ const fetchImgWithQuery = (searchQuery = 'popular', page = 1) => {
     .get(
       `/api/?q=${searchQuery}&page=${page}&key=${apiKey}&image_type=photo&orientation=horizontal&per_page=12`,
     )
-    .then(res => {
-      console.log(res.data);
-      return res.data;
-    });
+    .then(res => res.data);
 };
 
 export default { fetchImgWithQuery };
