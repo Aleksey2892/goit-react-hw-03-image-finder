@@ -36,6 +36,14 @@ export default class App extends Component {
     if (newPage > 2 && prevPage !== newPage) this.scrollDown();
   }
 
+  handleSearchBar = inputQuery => {
+    this.setState({ searchQuery: inputQuery, images: [], page: 1 });
+  };
+
+  handleLoadMore = () => {
+    this.fetchImages();
+  };
+
   fetchImages = () => {
     const { searchQuery, page } = this.state;
 
@@ -55,21 +63,6 @@ export default class App extends Component {
       .finally(() => this.setState({ loader: false }));
   };
 
-  scrollDown() {
-    window.scrollTo({
-      top: document.documentElement.scrollHeight,
-      behavior: 'smooth',
-    });
-  }
-
-  handleSearchBar = inputQuery => {
-    this.setState({ searchQuery: inputQuery, images: [], page: 1 });
-  };
-
-  handleLoadMore = () => {
-    this.fetchImages();
-  };
-
   openModal = bigImg => {
     this.setState({ bigImg: bigImg });
   };
@@ -77,6 +70,13 @@ export default class App extends Component {
   closeModal = () => {
     this.setState({ bigImg: null });
   };
+
+  scrollDown() {
+    window.scrollTo({
+      top: document.documentElement.scrollHeight,
+      behavior: 'smooth',
+    });
+  }
 
   render() {
     const { images, loader, page, totalPage, bigImg, error } = this.state;
