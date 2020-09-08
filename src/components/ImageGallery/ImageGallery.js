@@ -5,12 +5,11 @@ import ImageGalleryItem from './ImageGalleryItem';
 const ImageGallery = ({ images, onShowModal }) => {
   return (
     <ul className="ImageGallery">
-      {images.map(({ id, webformatURL, largeImageURL }) => (
+      {images.map(({ id, ...otherProps }) => (
         <ImageGalleryItem
           key={id}
-          src={webformatURL}
-          bigImg={largeImageURL}
           onShowModal={onShowModal}
+          otherProps={otherProps}
         />
       ))}
     </ul>

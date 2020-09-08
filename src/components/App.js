@@ -6,17 +6,17 @@ import ImageGallery from './ImageGallery/ImageGallery';
 import Button from './Button/Button';
 import Loader from './Loader/Loader';
 import Modal from './Modal/Modal';
+import Error from './Error/Error';
 
 export default class App extends Component {
   state = {
     images: [],
-    error: '',
     searchQuery: 'popular',
     page: 1,
     totalPage: 0,
     loader: false,
-    showModal: false,
     bigImg: null,
+    error: null,
   };
 
   componentDidMount() {
@@ -48,9 +48,10 @@ export default class App extends Component {
           images: [...prevState.images, ...hits],
           page: prevState.page + 1,
           totalPage: totalHits,
+          error: null,
         })),
       )
-      .catch(error => this.setState({ error }))
+      .catch(err => this.setState({ error: err.toString() }))
       .finally(() => this.setState({ loader: false }));
   };
 
@@ -69,32 +70,37 @@ export default class App extends Component {
     this.fetchImages();
   };
 
-  toogleModal = ({ target }) => {
-    const bigImg = target.getAttribute('data-bigImg');
-    this.setState({ showModal: true, bigImg: bigImg });
+  openModal = bigImg => {
+    this.setState({ bigImg: bigImg });
   };
 
   closeModal = () => {
-    this.setState({ showModal: false, bigImg: '' });
+    this.setState({ bigImg: null });
   };
 
   render() {
-    const { images, loader, page, totalPage, showModal, bigImg } = this.state;
+    const { images, loader, page, totalPage, bigImg, error } = this.state;
     const isShowGallery = images.length > 0;
     const isShowButton = isShowGallery && !loader && page !== totalPage;
 
     return (
       <>
         <Searchbar onSubmit={this.handleSearchBar} />
+
+        {error && <Error error={error} />}
+
         {isShowGallery && (
-          <ImageGallery images={images} onShowModal={this.toogleModal} />
+          <ImageGallery images={images} onShowModal={this.openModal} />
         )}
-        {showModal && (
+
+        {bigImg && (
           <Modal onClose={this.closeModal}>
             <img src={bigImg} alt="big-img" />
           </Modal>
         )}
+
         {isShowButton && <Button onLoadMore={this.handleLoadMore} />}
+
         {loader && <Loader />}
       </>
     );

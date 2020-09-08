@@ -1,0 +1,23 @@
+.errorBox {
+  max-width: 800px;
+  padding: 24px;
+  margin: 40px auto;
+  text-align: center;
+  border-radius: 10px;
+  background-color: rgb(219, 219, 219);
+}
+
+.errorTitle {
+  margin: 0 0 20px;
+  color: palevioletred;
+  font-size: 25px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.errorMessage {
+  margin: 0;
+  color: #3f51b5;
+  font-size: 16px;
+  font-weight: 600;
+}
