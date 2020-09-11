@@ -15,7 +15,7 @@ export default class App extends Component {
     page: 1,
     totalPage: 0,
     loader: false,
-    bigImg: null,
+    isModalImg: null,
     error: null,
   };
 
@@ -44,31 +44,34 @@ export default class App extends Component {
     this.fetchImages();
   };
 
-  fetchImages = () => {
+  fetchImages = async () => {
     const { searchQuery, page } = this.state;
 
     this.setState({ loader: true });
 
-    imagesApi
-      .fetchImgWithQuery(searchQuery, page)
-      .then(({ hits, totalHits }) =>
-        this.setState(prevState => ({
-          images: [...prevState.images, ...hits],
-          page: prevState.page + 1,
-          totalPage: totalHits,
-          error: null,
-        })),
-      )
-      .catch(err => this.setState({ error: err.toString() }))
-      .finally(() => this.setState({ loader: false }));
+    try {
+      const fetchData = await imagesApi.fetchImgWithQuery(searchQuery, page);
+      const { hits, totalHits } = fetchData;
+
+      this.setState(prevState => ({
+        images: [...prevState.images, ...hits],
+        page: prevState.page + 1,
+        totalPage: totalHits,
+        error: null,
+      }));
+    } catch (err) {
+      this.setState({ error: err.toString() });
+    } finally {
+      this.setState({ loader: false });
+    }
   };
 
-  openModal = bigImg => {
-    this.setState({ bigImg: bigImg });
+  openModal = isModalImg => {
+    this.setState({ isModalImg: isModalImg });
   };
 
   closeModal = () => {
-    this.setState({ bigImg: null });
+    this.setState({ isModalImg: null });
   };
 
   scrollDown() {
@@ -79,7 +82,7 @@ export default class App extends Component {
   }
 
   render() {
-    const { images, loader, page, totalPage, bigImg, error } = this.state;
+    const { images, loader, page, totalPage, isModalImg, error } = this.state;
     const isShowGallery = images.length > 0;
     const isShowButton = isShowGallery && !loader && page !== totalPage;
 
@@ -93,9 +96,9 @@ export default class App extends Component {
           <ImageGallery images={images} onShowModal={this.openModal} />
         )}
 
-        {bigImg && (
+        {isModalImg && (
           <Modal onClose={this.closeModal}>
-            <img src={bigImg} alt="big-img" />
+            <img src={isModalImg} alt="big-img" />
           </Modal>
         )}
 
