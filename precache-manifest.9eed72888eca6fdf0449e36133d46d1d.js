@@ -1,27 +1,27 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "8fff08ab33cc0e06a2ce576d8ddde8c8",
+    "revision": "18e797f2ea321a8cb2a3224a73e361a4",
     "url": "/goit-react-hw-03-image-finder/index.html"
   },
   {
-    "revision": "f8c174d58b1aacd6128f",
+    "revision": "8022f361e258997b14c8",
     "url": "/goit-react-hw-03-image-finder/static/css/2.47e97f0a.chunk.css"
   },
   {
-    "revision": "11b0db1e0e32a7492e8f",
+    "revision": "97b13b81437295160a78",
     "url": "/goit-react-hw-03-image-finder/static/css/main.216a9ddc.chunk.css"
   },
   {
-    "revision": "f8c174d58b1aacd6128f",
-    "url": "/goit-react-hw-03-image-finder/static/js/2.e2dfaf1f.chunk.js"
+    "revision": "8022f361e258997b14c8",
+    "url": "/goit-react-hw-03-image-finder/static/js/2.cfdfc61e.chunk.js"
   },
   {
     "revision": "e88a3e95b5364d46e95b35ae8c0dc27d",
-    "url": "/goit-react-hw-03-image-finder/static/js/2.e2dfaf1f.chunk.js.LICENSE.txt"
+    "url": "/goit-react-hw-03-image-finder/static/js/2.cfdfc61e.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "11b0db1e0e32a7492e8f",
-    "url": "/goit-react-hw-03-image-finder/static/js/main.e124888b.chunk.js"
+    "revision": "97b13b81437295160a78",
+    "url": "/goit-react-hw-03-image-finder/static/js/main.ee8a8809.chunk.js"
   },
   {
     "revision": "00ed64b4697a879a9e95",
