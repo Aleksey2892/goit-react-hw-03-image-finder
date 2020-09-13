@@ -50,8 +50,10 @@ export default class App extends Component {
     this.setState({ loader: true });
 
     try {
-      const fetchData = await imagesApi.fetchImgWithQuery(searchQuery, page);
-      const { hits, totalHits } = fetchData;
+      const { hits, totalHits } = await imagesApi.fetchImgWithQuery(
+        searchQuery,
+        page,
+      );
 
       this.setState(prevState => ({
         images: [...prevState.images, ...hits],
